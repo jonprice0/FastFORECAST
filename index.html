@@ -8,33 +8,88 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body>
+<body class="container-fluid">
     <header>
-        <h1></h1>
+        <h1>Weather Dashboard</h1>
     </header>
     <main>
-        <div>
-            <form id="user-form">
-                <label for=""></label>
-                <input type="text" id="city">
-                <button>Search</button>
-            </form>
-            <ul>
-                <button></button>
-            </ul>
-        </div>
-        <div>
-            <div>
-                <h2></h2>
-                <ul ></ul>
+        <div class="row">
+            <div class="col-3">
+                <form id="user-form">
+                    <label>Search for a City:</label>
+                    <input type="text" id="city" placeholder="San Diego">
+                    <button>Search</button>
+                </form>
+                <ul id="previous-searches">
+                    <li><button>Test</button></li>
+                    <li><button>Test</button></li>
+                    <li><button>Test</button></li>
+                    <li><button>Test</button></li>
+                    <li><button>Test</button></li>
+                </ul>
             </div>
-            <div>
-                <div>
-                    <h3></h3>
-                    <ul>
-                        <li></li>
+            <div class="col-9">
+                <div id="current-weather">
+                    <h2>Test</h2>
+                    <ul id="current-details">
+                        <li>Test</li>
+                        <li>Test</li>
+                        <li>Test</li>
+                        <li>Test</li>
+                        <li>Test</li>
                     </ul>
                 </div>
+                <div id="forecast">
+                    <h4>5-Day Forecast:</h3>
+                    <ul class="col-12 card-list">
+                        <li class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test</h5>
+                                <span></span>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test</h5>
+                                <span></span>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test</h5>
+                                <span></span>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test</h5>
+                                <span></span>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                            </div>
+                        </li>
+                        <li class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test</h5>
+                                <span></span>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                                <p class="card-text">Test</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             </div>
         </div>
     </main>

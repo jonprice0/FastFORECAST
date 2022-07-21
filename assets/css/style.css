@@ -1,0 +1,77 @@
+header {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align: center;
+    color: white;
+    background-color: #1062FF;
+    margin-bottom: 12px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+input,
+button {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    height: 34px;
+}
+
+label {
+    font-size: large;
+    text-align: left;
+    margin-bottom: 0px;
+}
+
+input {
+    height: 40px
+}
+
+form button {
+    background-color: #1062FF;
+}
+
+#previous-searches {
+    padding-top: 10px;
+    border-top: solid 2px darkgrey;
+}
+
+#previous-searches button {
+    background-color: darkgrey;
+}
+
+#current-weather {
+    border: solid 2px darkgrey;
+    padding-left: 6px;
+    padding-bottom: 4px;
+    margin-top: 4px;
+    margin-bottom: 6px;;
+}
+
+#forecast {
+    margin-top: 10px;
+}
+
+h2 {
+    margin-bottom: 0px;
+}
+
+.card-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    display: inline;
+    color: white;
+    background-color: #262C7A;
+    text-align: left;
+}
+
+.card-body {
+    padding-left: 6px;
+}
