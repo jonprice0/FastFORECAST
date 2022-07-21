@@ -47,9 +47,34 @@ form button {
 #current-weather {
     border: solid 2px darkgrey;
     padding-left: 6px;
-    padding-bottom: 4px;
+    padding-bottom: 0px;
     margin-top: 4px;
-    margin-bottom: 6px;;
+    margin-bottom: 0px;;
+}
+
+#current-weather li {
+    padding-top: 12px;
+}
+
+#current-details {
+    
+}
+#current-details span {
+    margin-left: 4px;
+    width: 16px;
+    padding: 3px;
+    border-radius: 3px;
+}
+.favorable {
+    background-color: green;
+}
+
+.moderate {
+    background-color: #FFE710;
+}
+
+.severe {
+    background-color: red;
 }
 
 #forecast {
