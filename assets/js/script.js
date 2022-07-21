@@ -2,74 +2,8 @@ let userFormEl = $("#user-form");
 let inputEl = $("#city-state");
 let currentWeatherContainerEl = $("#current-weather-container");
 let forecastContainerEl = $("#forecast-container");
+let storageArr = [];
 
-let formSubmitHandler = e => {
-    e.preventDefault();
-    // get values from input element:
-    let cityState = inputEl[0].value.trim();
-    // validate input and call the geocoding api request function:
-    var cityFormat = /([A-Z][a-z]+\s?)+,\s[A-Z]{2}/g;
-    if (cityState.match(cityFormat)) {
-        let city = cityState.split(", ")[0];
-        let state = cityState.split(", ")[1];
-        getCityCoordinates(city, state);
-        inputEl[0].value = "";
-    } else {
-        alert("Please enter a city and a state code separated by a comma.");
-    };
-};
-
-var getCurrentWeather = (lat, lon, city) => {
-    const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
-    var apiUrlCurrentWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
-    
-    // make a request to the url:
-    fetch(apiUrlCurrentWeather)
-        .then(response => {
-            // check whether request was successful:
-            if (response.ok) {
-                response.json()
-                    .then(data =>{
-                        displayCurrentWeather(data, city);
-                    });
-            } else {
-                alert("Error: City not found");
-            };
-        })
-        // error handling:
-        .catch(error => {
-            console.log(error);
-            alert("Unable to connect to weather database.");
-        });
-};
-
-var getCityCoordinates = (city, state) => {
-    const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
-    var apiUrlCityCoordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=${apiKey}`;
-    
-    fetch(apiUrlCityCoordinates)
-    .then(response => {
-        // check whether request was successful:
-        if (response.ok) {
-            response.json()
-                .then(data =>{
-                    // extract latitude and longitude from the response and call the weather api function:
-                    let latitude = data[0].lat.toString().slice(0, 5);
-                    let longitude = data[0].lon.toString().slice(0, 5);
-                    getCurrentWeather(latitude, longitude, city, state);
-                });
-        } else {
-            // error handling:
-            alert("Oops. Something went wrong.")
-        };
-    })
-    // error handling:
-    .catch(error => {
-        console.log(error);
-        alert("Unable to connect to weather database.");
-    });
-};
-            
 let displayCurrentWeather = (data, city, state) => {
     // destructure the data, convert temp from Kelvin to Fahrenheit, and get the current weather icon:
     let { current, daily } = data;
@@ -166,7 +100,85 @@ let displayCurrentWeather = (data, city, state) => {
         forecastHumidityEl.text(`Humidity: ${humidity} %`);
         forecastWindEl.append(forecastHumidityEl[0]);
     };
+};
 
+var saveSearch = (city, state) => {
+    storageArr = JSON.parse(localStorage.getItem("search-history"));
+    if (!storageArr) {
+        storageArr = [];
+    }
+    storageStr = (`["${city}", "${state}"]`);
+    let newStorageArr = [...storageArr, storageStr]
+    displayToSearchHistory(city, state)
+    localStorage.setItem("search-history", JSON.stringify(newStorageArr));
+}
+
+var getCurrentWeather = (lat, lon, city, state) => {
+    const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
+    var apiUrlCurrentWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
+    
+    // make a request to the url:
+    fetch(apiUrlCurrentWeather)
+        .then(response => {
+            // check whether request was successful:
+            if (response.ok) {
+                response.json()
+                    .then(data =>{
+                        displayCurrentWeather(data, city);
+                        saveSearch(city, state);
+                    });
+            } else {
+                alert("Error: City not found");
+            };
+        })
+        // error handling:
+        .catch(error => {
+            console.log(error);
+            alert("Unable to connect to weather database.");
+        });
+};
+      
+var getCityCoordinates = (city, state) => {
+    const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
+    var apiUrlCityCoordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=${apiKey}`;
+    
+    fetch(apiUrlCityCoordinates)
+    .then(response => {
+        // check whether request was successful:
+        if (response.ok) {
+            response.json()
+                .then(data =>{
+                    // extract latitude and longitude from the response and call the weather api function:
+                    let latitude = data[0].lat.toString().slice(0, 5);
+                    let longitude = data[0].lon.toString().slice(0, 5);
+                    getCurrentWeather(latitude, longitude, city, state);
+                });
+        } else {
+            // error handling:
+            alert("Oops. Something went wrong.")
+        };
+    })
+    // error handling:
+    .catch(error => {
+        console.log(error);
+        alert("Unable to connect to weather database.");
+    });
+};
+      
+let formSubmitHandler = e => {
+    e.preventDefault();
+    // get values from input element:
+    let cityState = inputEl[0].value.trim();
+    // validate input and call the geocoding api request function:
+    var cityFormat = /([A-Z][a-z]+\s?)+,\s[A-Z]{2}/g;
+    if (cityState.match(cityFormat)) {
+        let city = cityState.split(", ")[0];
+        let state = cityState.split(", ")[1];
+        getCityCoordinates(city, state);
+        inputEl[0].value = "";
+    } else {
+        alert("Please enter a city and a state code separated by a comma.");
+    };
 };
 
 userFormEl.on("submit", formSubmitHandler);
