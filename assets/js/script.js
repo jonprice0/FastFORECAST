@@ -1,12 +1,13 @@
 let userFormEl = $("#user-form");
 let inputEl = $("#city-state");
 let currentWeatherContainerEl = $("#current-weather-container");
+let forecastContainerEl = $("#forecast-container");
 
 let formSubmitHandler = e => {
     e.preventDefault();
-    // get values from input element
+    // get values from input element:
     let cityState = inputEl[0].value.trim();
-    // validates input and calls the geocoding api request function
+    // validate input and call the geocoding api request function:
     var cityFormat = /([A-Z][a-z]+\s?)+,\s[A-Z]{2}/g;
     if (cityState.match(cityFormat)) {
         let city = cityState.split(", ")[0];
@@ -22,10 +23,10 @@ var getCurrentWeather = (lat, lon, city) => {
     const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
     var apiUrlCurrentWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
     
-    // make a request to the url
+    // make a request to the url:
     fetch(apiUrlCurrentWeather)
         .then(response => {
-            // checks whether request was successful
+            // check whether request was successful:
             if (response.ok) {
                 response.json()
                     .then(data =>{
@@ -35,7 +36,7 @@ var getCurrentWeather = (lat, lon, city) => {
                 alert("Error: City not found");
             };
         })
-        // error handling
+        // error handling:
         .catch(error => {
             console.log(error);
             alert("Unable to connect to weather database.");
@@ -48,21 +49,21 @@ var getCityCoordinates = (city, state) => {
     
     fetch(apiUrlCityCoordinates)
     .then(response => {
-        // checks whether request was successful
+        // check whether request was successful:
         if (response.ok) {
             response.json()
                 .then(data =>{
-                    // extracts latitude and longitude from the response and calls the weather api function
+                    // extract latitude and longitude from the response and call the weather api function:
                     let latitude = data[0].lat.toString().slice(0, 5);
                     let longitude = data[0].lon.toString().slice(0, 5);
                     getCurrentWeather(latitude, longitude, city, state);
                 });
         } else {
-            // error handling
+            // error handling:
             alert("Oops. Something went wrong.")
         };
     })
-    // error handling
+    // error handling:
     .catch(error => {
         console.log(error);
         alert("Unable to connect to weather database.");
@@ -70,16 +71,22 @@ var getCityCoordinates = (city, state) => {
 };
             
 let displayCurrentWeather = (data, city, state) => {
+    // destructure the data, convert temp from Kelvin to Fahrenheit, and get the current weather icon:
     let { current, daily } = data;
-    let iconCode = (current.weather[0].icon);
-    let iconSrc = `http://openweathermap.org/img/w/${iconCode}.png`;
     let { temp, wind_speed, humidity, uvi } = current;
     temp = ((temp - 273.15) * (9/5) + 32).toFixed(2);
+    let iconCode = (current.weather[0].icon);
+    let iconSrc = `http://openweathermap.org/img/w/${iconCode}.png`;
 
+    // clear current weather and forecast displays:
     if ($("#current-weather")) {
         $("#current-weather").remove();
     };
+    if ($("#forecast")) {
+        $("#forecast").remove();
+    };
 
+    // display current weather:
     let currentWeatherDivEl = $("<div></div").attr("id", "current-weather");
     currentWeatherContainerEl[0].append(currentWeatherDivEl[0]);
     
@@ -89,8 +96,6 @@ let displayCurrentWeather = (data, city, state) => {
     
     let currentWeatherUlEl = $("<ul></ul>").attr("id", "current-details");
     currentWeatherH2El.after(currentWeatherUlEl[0]);
-
-    console.log(currentWeatherH2El);
 
     let currentWeatherDetailsArr = [`Temp: ${temp} °F`, `Wind: ${wind_speed} MPH`, `Humidity: ${humidity} %`, ""]
     for (i = 0; i < currentWeatherDetailsArr.length; i++) {
@@ -108,6 +113,60 @@ let displayCurrentWeather = (data, city, state) => {
     };
     let uvIndexLiEl = $("#current-details :nth-child(4)");
     uvIndexLiEl.html($(`<p>UV Index: <span ${uviClass}>${uvi}</span></p>`));
+
+    // display 5-day forecast:
+    let forecastDivEl = $("<div></div").attr("id", "forecast");
+    forecastContainerEl[0].append(forecastDivEl[0]);
+
+    let forecastH4El = $("<h4></h4>").text("5-Day Forecast:");
+    forecastDivEl.append(forecastH4El[0]);
+
+    let forecastUlEl = $("<ul></ul>")
+        .attr({
+            "id": "forecast-list",
+            "class": "col-12 card-list"
+        });
+    forecastH4El.append(forecastUlEl[0]);
+
+    // loop through the daily forecasts returned by the api:
+    for (i = 0; i < 5; i++) {
+        // assign variables:
+        let { temp, wind_speed, humidity } = (daily[i]);
+        let forecastIconCode = (daily[i].weather[0].icon);
+        let forecastIconSrc = `http://openweathermap.org/img/w/${forecastIconCode}.png`;
+        // compute the daily average temperature and convert the result from Kelvin to Fahrenheit:
+        avgTemp = (temp.day + temp.night) / 2;
+        avgTemp = ((avgTemp - 273.15) * (9/5) + 32).toFixed(2);
+
+        let forecastLiEl = $("<li></li>");
+        forecastLiEl.attr("class", "card");
+        forecastUlEl.append(forecastLiEl[0]);
+
+        let forecastCardBody = $("<div></div>");
+        forecastCardBody.attr("class", "card-body");
+        forecastLiEl.append(forecastCardBody[0]);
+
+        let formattedDate = moment().add(i + 1, 'd').format('M/D/YYYY');
+        let forecastH5El = $("<h5></>").text(`${formattedDate}`);
+        forecastCardBody.append(forecastH5El[0]);
+        
+        let iconSpanEl = $("<span></span");
+        iconSpanEl.html(`<img src="${forecastIconSrc}">`);
+        forecastH5El.append(iconSpanEl[0]);
+        // `Temp: ${temp} °F`, `Wind: ${wind_speed} MPH`, `Humidity: ${humidity} %`
+        let forecastTempEl = $("<p></p>").attr("class", "card-text");
+        forecastTempEl.text(`Temp: ${avgTemp} °F`);
+        iconSpanEl.append(forecastTempEl[0]);
+
+        let forecastWindEl = $("<p></p>").attr("class", "card-text");
+        forecastWindEl.text(`Wind: ${wind_speed} MPH`);
+        forecastTempEl.append(forecastWindEl[0]);
+
+        let forecastHumidityEl = $("<p></p>").attr("class", "card-text");
+        forecastHumidityEl.text(`Humidity: ${humidity} %`);
+        forecastWindEl.append(forecastHumidityEl[0]);
+    };
+
 };
 
 userFormEl.on("submit", formSubmitHandler);
