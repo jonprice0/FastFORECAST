@@ -46,6 +46,7 @@ ul {
 #previous-searches button {
     background-color: darkgrey;
 }
+
 /* styles for the dynamically rendered current weather data */
 #current-weather {
     border: solid 2px darkgrey;
@@ -104,6 +105,7 @@ h2 {
     color: white;
     background-color: #262C7A;
     text-align: left;
+    border-radius: 0px;
 }
 
 .card-body {
