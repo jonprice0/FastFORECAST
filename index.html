@@ -8,33 +8,32 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body>
+<body class="container-fluid">
     <header>
-        <h1></h1>
+        <h1>Weather Dashboard</h1>
     </header>
     <main>
-        <div>
-            <form id="user-form">
-                <label for=""></label>
-                <input type="text" id="city">
-                <button>Search</button>
-            </form>
-            <ul>
-                <button></button>
-            </ul>
-        </div>
-        <div>
-            <div>
-                <h2></h2>
-                <ul ></ul>
+        <div class="row">
+            <!-- Holds search form and search history -->
+            <div class="col-12 col-sm-12 col-md-3">
+                <form id="user-form">
+                    <label>Search for a City:</label>
+                    <input type="text" id="city-state" placeholder="San Diego, CA">
+                    <button>Search</button>
+                </form>
+                <ul id="previous-searches">
+                    <!-- search history generated dynamically -->
+                </ul>
             </div>
-            <div>
-                <div>
-                    <h3></h3>
-                    <ul>
-                        <li></li>
-                    </ul>
+            <!-- Holds all search results/weather data -->
+            <div class="col-12 col-sm-12 col-md-9">
+                <div id="current-weather-container">
+                    <!-- current weather generated dynamically -->
                 </div>
+                <div id="forecast-container">
+                    <!-- 5-day forecast generated dynamically -->
+                </div>
+            </div>
             </div>
         </div>
     </main>

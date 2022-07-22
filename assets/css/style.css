@@ -1,0 +1,127 @@
+header {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align: center;
+    color: white;
+    background-image: linear-gradient(to right, #1062FF, #262C7A);
+    margin-bottom: 12px;
+}
+
+/* styles for the search form */
+input,
+button {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    height: 34px;
+}
+
+label {
+    font-size: large;
+    text-align: left;
+    margin-bottom: 0px;
+}
+
+input {
+    height: 40px
+}
+
+form button {
+    background-color: #1062FF;
+}
+
+/* styles for the dynamically-rendered search history */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#previous-searches {
+    display: none;
+    padding-top: 10px;
+    border-top: solid 2px darkgrey;
+}
+
+#previous-searches button {
+    background-color: darkgrey;
+}
+
+/* styles for the dynamically rendered current weather data */
+#current-weather {
+    border: solid 2px darkgrey;
+    padding-left: 6px;
+    padding-bottom: 0px;
+    margin-top: 4px;
+    margin-bottom: 0px;;
+}
+
+#current-weather li {
+    padding-top: 12px;
+}
+
+#current-details span {
+    margin-left: 4px;
+    width: 16px;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+/* classes for conditionally rendering the UV index color codes */
+.favorable {
+    background-color: green;
+}
+
+.moderate {
+    background-color: #FFE710;
+}
+
+.severe {
+    background-color: red;
+}
+
+/* styles for the 5-day forecast data */
+#forecast-container {
+    margin-top: 10px;
+}
+
+h2 {
+    margin-bottom: 0px;
+}
+
+.card-list {
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 8px;
+    display: flex;
+    align-content: space-between;
+}
+
+.card {
+    display: flex;
+    margin-right: 18px;
+    margin-bottom: 18px;
+    display: inline;
+    color: white;
+    background-color: #262C7A;
+    text-align: left;
+    border-radius: 0px;
+}
+
+.card-body {
+    padding: 10px 8px 12px 6px;
+}
+
+h5 {
+    margin-bottom: 0px;
+    font-size: medium;
+}
+
+.card-body span {
+    display: block;
+}
+
+.card-text {
+    margin-top: 5px;
+    font-size: small;
+}
