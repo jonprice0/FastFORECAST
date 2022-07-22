@@ -12,7 +12,7 @@ let displayCurrentWeather = (data, city) => {
     let { temp, wind_speed, humidity, uvi } = current;
     temp = ((temp - 273.15) * (9/5) + 32).toFixed(2);
     let iconCode = (current.weather[0].icon);
-    let iconSrc = `https://openweathermap.org/img/w/${iconCode}.png`;
+    let iconSrc = `https://crossorigin.me/http://openweathermap.org/img/w/${iconCode}.png`;
 
     // clear current weather and forecast displays:
     if ($("#current-weather")) {
@@ -70,7 +70,7 @@ let displayCurrentWeather = (data, city) => {
         // assign variables:
         let { temp, wind_speed, humidity } = (daily[i]);
         let forecastIconCode = (daily[i].weather[0].icon);
-        let forecastIconSrc = `https://openweathermap.org/img/w/${forecastIconCode}.png`;
+        let forecastIconSrc = `https://crossorigin.me/http://openweathermap.org/img/w/${forecastIconCode}.png`;
         // compute the daily average temperature and convert the result from Kelvin to Fahrenheit:
         avgTemp = (temp.day + temp.night) / 2;
         avgTemp = ((avgTemp - 273.15) * (9/5) + 32).toFixed(2);
@@ -149,7 +149,7 @@ var saveSearch = (city, state) => {
 
 var getCurrentWeather = (lat, lon, city, state) => {
     const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
-    var apiUrlCurrentWeather = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
+    var apiUrlCurrentWeather = `https://crossorigin.me/http://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
     
     // make a request to the url:
     fetch(apiUrlCurrentWeather)
@@ -174,7 +174,7 @@ var getCurrentWeather = (lat, lon, city, state) => {
       
 var getCityCoordinates = (city, state) => {
     const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
-    var apiUrlCityCoordinates = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=${apiKey}`;
+    var apiUrlCityCoordinates = `https://crossorigin.me/http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=${apiKey}`;
     
     fetch(apiUrlCityCoordinates)
     .then(response => {
