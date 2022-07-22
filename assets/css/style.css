@@ -3,16 +3,11 @@ header {
     padding-bottom: 7px;
     text-align: center;
     color: white;
-    background-color: #1062FF;
+    background-image: linear-gradient(to right, #1062FF, #262C7A);
     margin-bottom: 12px;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
+/* styles for the search form */
 input,
 button {
     width: 100%;
@@ -35,7 +30,15 @@ form button {
     background-color: #1062FF;
 }
 
+/* styles for the dynamically-rendered search history */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 #previous-searches {
+    display: none;
     padding-top: 10px;
     border-top: solid 2px darkgrey;
 }
@@ -43,7 +46,7 @@ form button {
 #previous-searches button {
     background-color: darkgrey;
 }
-
+/* styles for the dynamically rendered current weather data */
 #current-weather {
     border: solid 2px darkgrey;
     padding-left: 6px;
@@ -56,15 +59,14 @@ form button {
     padding-top: 12px;
 }
 
-#current-details {
-    
-}
 #current-details span {
     margin-left: 4px;
     width: 16px;
     padding: 3px;
     border-radius: 3px;
 }
+
+/* classes for conditionally rendering the UV index color codes */
 .favorable {
     background-color: green;
 }
@@ -77,6 +79,7 @@ form button {
     background-color: red;
 }
 
+/* styles for the 5-day forecast data */
 #forecast-container {
     margin-top: 10px;
 }
@@ -86,11 +89,17 @@ h2 {
 }
 
 .card-list {
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 8px;
     display: flex;
-    justify-content: space-between;
+    align-content: space-between;
 }
 
 .card {
+    display: flex;
+    margin-right: 18px;
+    margin-bottom: 18px;
     display: inline;
     color: white;
     background-color: #262C7A;
@@ -98,5 +107,19 @@ h2 {
 }
 
 .card-body {
-    padding-left: 6px;
+    padding: 10px 8px 12px 6px;
+}
+
+h5 {
+    margin-bottom: 0px;
+    font-size: medium;
+}
+
+.card-body span {
+    display: block;
+}
+
+.card-text {
+    margin-top: 5px;
+    font-size: small;
 }

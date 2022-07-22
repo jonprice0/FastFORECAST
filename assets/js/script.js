@@ -76,7 +76,7 @@ let displayCurrentWeather = (data, city) => {
         avgTemp = ((avgTemp - 273.15) * (9/5) + 32).toFixed(2);
 
         let forecastLiEl = $("<li></li>");
-        forecastLiEl.attr("class", "card");
+        forecastLiEl.attr("class", "card ");
         forecastUlEl.append(forecastLiEl[0]);
 
         let forecastCardBody = $("<div></div>");
@@ -114,6 +114,7 @@ let displayToSearchHistory = (city, state) => {
         state = searchBtnEl.attr("data-state");
         getCityCoordinates(city, state);
     });
+    $("#previous-searches")[0].style.display = "block";
     $("#previous-searches").append(searchBtnEl);
 };
 
@@ -198,9 +199,6 @@ var getCityCoordinates = (city, state) => {
     });
 };
 
-// add a handler to the search form:
-userFormEl.on("submit", formSubmitHandler);
-
 let formSubmitHandler = e => {
     e.preventDefault();
     // get values from input element:
@@ -217,12 +215,16 @@ let formSubmitHandler = e => {
     };
 };
 
+// add a handler to the search form:
+userFormEl.on("submit", formSubmitHandler);
+
 let loadSearchHistory = () => {
     storageArr = JSON.parse(localStorage.getItem("search-history"));
     if (!storageArr) {
         return;
     }
     else {
+        $("#previous-searches")[0].style.display = "block";
         for (i = 0; i < storageArr.length; i++) {
             city = storageArr[i].split('"')[1];
             state = storageArr[i].split('"')[3];
