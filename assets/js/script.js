@@ -1,10 +1,12 @@
 let userFormEl = $("#user-form");
 let inputEl = $("#city-state");
+let searchHistoryUlEl = $("#previous-searches");
 let currentWeatherContainerEl = $("#current-weather-container");
 let forecastContainerEl = $("#forecast-container");
+
 let storageArr = [];
 
-let displayCurrentWeather = (data, city, state) => {
+let displayCurrentWeather = (data, city) => {
     // destructure the data, convert temp from Kelvin to Fahrenheit, and get the current weather icon:
     let { current, daily } = data;
     let { temp, wind_speed, humidity, uvi } = current;
@@ -36,6 +38,7 @@ let displayCurrentWeather = (data, city, state) => {
         currentWeatherUlEl.append($(`<li>${currentWeatherDetailsArr[i]}</li>`));
     };
     
+    // color code UV index display:
     let uviClass = "";
     if (uvi < 3) {
         uviClass = 'class="favorable"';
@@ -87,7 +90,7 @@ let displayCurrentWeather = (data, city, state) => {
         let iconSpanEl = $("<span></span");
         iconSpanEl.html(`<img src="${forecastIconSrc}">`);
         forecastH5El.append(iconSpanEl[0]);
-        // `Temp: ${temp} °F`, `Wind: ${wind_speed} MPH`, `Humidity: ${humidity} %`
+
         let forecastTempEl = $("<p></p>").attr("class", "card-text");
         forecastTempEl.text(`Temp: ${avgTemp} °F`);
         iconSpanEl.append(forecastTempEl[0]);
@@ -102,16 +105,46 @@ let displayCurrentWeather = (data, city, state) => {
     };
 };
 
+// create a search button element, add an event listener, and append it to the search history:
+let displayToSearchHistory = (city, state) => {
+    let searchBtnEl = $(`<button>${city}</button>`);
+    searchBtnEl.attr("data-state", `${state}`);
+    searchBtnEl[0].addEventListener("click", () => {
+        city = searchBtnEl[0].innerText;
+        state = searchBtnEl.attr("data-state");
+        getCityCoordinates(city, state);
+    });
+    $("#previous-searches").append(searchBtnEl);
+};
+
 var saveSearch = (city, state) => {
+    // get storage array from local storage; if it isn't in storage, set it to an empty array:
     storageArr = JSON.parse(localStorage.getItem("search-history"));
     if (!storageArr) {
         storageArr = [];
-    }
+    };
+    // create a string from the search terms:
     storageStr = (`["${city}", "${state}"]`);
-    let newStorageArr = [...storageArr, storageStr]
-    displayToSearchHistory(city, state)
-    localStorage.setItem("search-history", JSON.stringify(newStorageArr));
-}
+    // if the storage array is empty, add the search string to the array, display it in the search history, and set it in local storage:
+    if (storageArr.length === 0) {
+        let newStorageArr = [storageStr];
+        displayToSearchHistory(city, state);
+        localStorage.setItem("search-history", JSON.stringify(newStorageArr));
+    }
+    else {
+        let isNew = true;
+        for (i = 0; i < storageArr.length; i++) {
+            if (storageArr[i] === storageStr) {
+               isNew = false;
+            };
+        };
+        if (isNew) {
+            let newStorageArr = [...storageArr, storageStr];
+            displayToSearchHistory(city, state);
+            localStorage.setItem("search-history", JSON.stringify(newStorageArr));
+        };
+    };
+};
 
 var getCurrentWeather = (lat, lon, city, state) => {
     const apiKey = "5cda3e33cf0e17bd1edc1617c8b6b14d";
@@ -164,7 +197,10 @@ var getCityCoordinates = (city, state) => {
         alert("Unable to connect to weather database.");
     });
 };
-      
+
+// add a handler to the search form:
+userFormEl.on("submit", formSubmitHandler);
+
 let formSubmitHandler = e => {
     e.preventDefault();
     // get values from input element:
@@ -181,4 +217,19 @@ let formSubmitHandler = e => {
     };
 };
 
-userFormEl.on("submit", formSubmitHandler);
+let loadSearchHistory = () => {
+    storageArr = JSON.parse(localStorage.getItem("search-history"));
+    if (!storageArr) {
+        return;
+    }
+    else {
+        for (i = 0; i < storageArr.length; i++) {
+            city = storageArr[i].split('"')[1];
+            state = storageArr[i].split('"')[3];
+            displayToSearchHistory(city, state); 
+        };
+    };
+};
+
+// on page load get search history from local storage and display it:
+loadSearchHistory();
