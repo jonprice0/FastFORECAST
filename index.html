@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body class="container-fluid">
+<body>
     <header>
-        <h1>Weather Dashboard</h1>
+        <h1><span id="ital">Fast</span>FORECAST</h1>
     </header>
-    <main>
+    <main class="container-fluid">
         <div class="row">
             <!-- Holds search form and search history -->
             <div class="col-12 col-sm-12 col-md-3">
                 <form id="user-form">
                     <label>Search for a City:</label>
-                    <input type="text" id="city-state" placeholder="San Diego, CA">
+                    <input type="text" id="city-state" placeholder=" Enter location ...">
                     <button>Search</button>
                 </form>
                 <ul id="previous-searches">
