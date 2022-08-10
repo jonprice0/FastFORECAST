@@ -21,8 +21,6 @@
 
 ## Here are screenshots of the finished page:
 
-![Screenshot of weather-dashboard on load](./assets/images/weather-dashboard-on-load.png)
-
 ![Screenshot of weather-dashboard search results and search history](./assets/images/weather-dashboard-search-results.png)
 
 ![Screenshot of weather-dashboard responsive layout](./assets/images/weather-dashboard-responsive-layout.png)

@@ -27,7 +27,7 @@ let displayCurrentWeather = (data, city) => {
     currentWeatherContainerEl[0].append(currentWeatherDivEl[0]);
     
     let currentWeatherH2El = $("<h2></h2>");
-    currentWeatherH2El.html(`${city} (${moment().format('M/D/YYYY')}) <img src="${iconSrc}">`);
+    currentWeatherH2El.html(`${city} <span>(${moment().format('M/D/YYYY')})</span> <img src="${iconSrc}">`);
     currentWeatherDivEl.append(currentWeatherH2El[0]);
     
     let currentWeatherUlEl = $("<ul></ul>").attr("id", "current-details");

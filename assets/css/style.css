@@ -8,7 +8,8 @@ h1 {
     padding-top: 4px;
     padding-bottom: 6px;
     padding-left: 15px;
-    font-size: 40px;
+    font-size: 38px;
+    font-weight: 600;
     font-family: 'Oswald', sans-serif;
     background: linear-gradient(to right, #87CEEB, #191970);
     background-clip: padding-box;
@@ -18,9 +19,13 @@ h1 {
 
 #ital {
     font-style: oblique;
-    font-size: 33px;
+    font-size: 28px;
     font-weight: 600;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+    font-family: 'Oxygen', sans-serif;
 }
 
 /* styles for the search form */
@@ -93,8 +98,12 @@ ul {
 }
 
 h2 {
-    margin-bottom: 0px;
+    font-size: 32px;
     margin-bottom: -8px;
+}
+
+h2 span {
+    font-size: 22px;
 }
 
 #current-details span {
@@ -128,9 +137,9 @@ li p {
 .card-list {
     flex-wrap: wrap;
     flex-direction: row;
-    margin-top: 8px;
+    margin-top: 3px;
     display: flex;
-    align-content:space-between;
+    align-content:space-around;
     padding-left: 0px;
     padding-right: 0px;
 }
