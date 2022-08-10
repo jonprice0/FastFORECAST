@@ -1,5 +1,5 @@
 
-# Weather Dashboard #
+# FastFORECAST #
 
 ## Objective ##
 
@@ -21,9 +21,9 @@
 
 ## Here are screenshots of the finished page:
 
-![Screenshot of weather-dashboard search results and search history](./assets/images/weather-dashboard-search-results.png)
+![Screenshot of fast-forecast search results and search history](./assets/images/fast-forecast-search-results.png)
 
-![Screenshot of weather-dashboard responsive layout](./assets/images/weather-dashboard-responsive-layout.png)
+![Screenshot of fast-forecast responsive layout](./assets/images/fast-forecast-responsive-layout.png)
 
 ## License
 
@@ -31,4 +31,4 @@
 
 ## Contributions:
 
->Made from scratch with ❤️ by Jonathan Price.
+>Made from scratch by Jonathan Price using the OpenWeather API.
