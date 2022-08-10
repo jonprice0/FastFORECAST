@@ -7,10 +7,8 @@ h1 {
     width: max-content;
     padding-top: 4px;
     padding-bottom: 6px;
-    padding-left: 13px;
-    margin-bottom: 16px;
+    padding-left: 15px;
     font-size: 40px;
-    font-weight: 800;
     font-family: 'Oswald', sans-serif;
     background: linear-gradient(to right, #87CEEB, #191970);
     background-clip: padding-box;
@@ -20,36 +18,48 @@ h1 {
 
 #ital {
     font-style: oblique;
-    font-size: 32px;
+    font-size: 33px;
     font-weight: 600;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* styles for the search form */
+#user-form {
+    margin-top: 12px;
+}
+
 input,
 button {
     width: 100%;
     margin-bottom: 12px;
-    border-radius: 3px;
+    border-radius: 5px;
     height: 34px;
     border: none;
 }
+    
+button:focus {outline:0;}
 
 label {
     color: #404040;
     font-size: 14px;
     text-align: left;
-    margin-bottom: 0px;
+    padding-left: 6px;
+    margin-bottom: 1px;
 }
 
 input {
     height: 34px;
     border: 1px solid grey;
+    border-radius: 0px;
 }
 
 form button {
     color: white;
     background-color:#FF7900;
+}
+
+form button:hover {
+    background-color:#E66000;
 }
 
 /* styles for the dynamically-rendered search history */
@@ -67,27 +77,34 @@ ul {
 
 #previous-searches button {
     color:  white;
-    background-color:#3E5599;
+    background-color:#3F569A;
+}
+
+#previous-searches button:hover {
+    background-color: #253C80;
 }
 
 /* styles for the dynamically rendered current weather data */
 #current-weather {
-    border: solid 2px darkgrey;
-    padding-left: 6px;
-    padding-bottom: 0px;
-    margin-top: 4px;
-    margin-bottom: 0px;;
+    border: solid 1px darkgrey;
+    padding-left: 12px;
+    margin-top: 12px;
+    background-color: #F2F3F5;
 }
 
-#current-weather li {
-    padding-top: 12px;
+h2 {
+    margin-bottom: 0px;
+    margin-bottom: -8px;
 }
 
 #current-details span {
-    margin-left: 4px;
     width: 16px;
-    padding: 3px;
+    padding: 1px 6px;
     border-radius: 3px;
+}
+
+li p {
+    margin-bottom: 6px;
 }
 
 /* classes for conditionally rendering the UV index color codes */
@@ -105,11 +122,7 @@ ul {
 
 /* styles for the 5-day forecast data */
 #forecast-container {
-    margin-top: 10px;
-}
-
-h2 {
-    margin-bottom: 0px;
+    margin-top: 12px;
 }
 
 .card-list {
@@ -117,7 +130,9 @@ h2 {
     flex-direction: row;
     margin-top: 8px;
     display: flex;
-    align-content: space-between;
+    align-content:space-between;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .card {
@@ -125,14 +140,14 @@ h2 {
     margin-right: 18px;
     margin-bottom: 18px;
     display: inline;
-    color: white;
-    background-color: #262C7A;
+    background-color: #F2F3F5;
     text-align: left;
+    border: solid 1px darkgrey;
     border-radius: 0px;
 }
 
 .card-body {
-    padding: 10px 8px 12px 6px;
+    padding: 10px 8px 10px 6px;
 }
 
 h5 {
@@ -145,6 +160,6 @@ h5 {
 }
 
 .card-text {
-    margin-top: 5px;
+    margin-top: 3px;
     font-size: small;
 }
